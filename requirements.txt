@@ -1,0 +1,3 @@
+python-markdown
+jinja2
+pygments
