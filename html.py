@@ -28,7 +28,7 @@ def main():
     inname, outname = sys.argv[1:3]
     with open(inname) as i:
         with open(outname, 'w') as o:
-            o.write(render(i.read()))
+            o.write(render(i.read()).encode('utf8'))
 
 if __name__ == '__main__':
     main()
