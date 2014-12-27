@@ -1,6 +1,7 @@
 """Rendering lists of blog posts to generate the various pages."""
 
 import os, sys
+import datetime
 import util
 import jinja2
 from collections import defaultdict
@@ -23,11 +24,13 @@ def renderIndex(posts):
     """Render the front page, listing all posts."""
     sections = defaultdict(list)
     for post in posts:
-        sections[post.date.year].append({
-            'title': post.title,
-            'href': post.filename.replace('.md', '.html'),
-        })
+        sections[post.date.year].append(post)
     return getTemplate('index').render(sections=sorted(sections.items()))
+
+def renderRSS(posts):
+    """Render the RSS feed."""
+    now = datetime.datetime.now().strftime('%a, %d %b %Y %H:%M:%S %z')
+    return getTemplate('feed').render(now=now, posts=posts)
 
 def renderAll(srcDir, htmlDir):
     """Take all the blog posts in srcDir, render blog to htmlDir."""
@@ -44,8 +47,9 @@ def renderAll(srcDir, htmlDir):
     print 'Generating index.html'
     with open(os.path.join(htmlDir, 'index.html'), 'w') as f:
         f.write(renderIndex(posts))
-        
-    # TODO(dparrol): RSS or atom feed
+    print 'Generating RSS feed'
+    with open(os.path.join(htmlDir, 'feed.xml'), 'w') as f:
+        f.write(renderRSS(posts))
 
     # Copy over the whole static resource hierarchy (if any).
     if os.path.exists(os.path.join(srcDir, 'static')):

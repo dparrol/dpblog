@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0">
+<channel>
+ <title>Danrich Parrol's Blog</title>
+ <description>Thoughts, mostly about technology</description>
+ <link>https://dparrol.github.io/</link>
+ <lastBuildDate>{{now}}</lastBuildDate>
+ <pubDate>{{now}}</pubDate>
+ <language>en-US</language>
+
+{%- for post in posts %} 
+ <item>
+  <title>{{post.title}}</title>
+  <description></description>
+  <link>https://dparrol.github.io/{{post.href}}</link>
+  <guid isPermaLink="true">https://dparrol.github.io/{{post.href}}</guid>
+  <pubDate>{{post.date.strftime('%a, %d %b %Y %H:%M:%S %z')}}</pubDate>
+ </item>
+{% endfor -%} 
+
+</channel>
+</rss>
