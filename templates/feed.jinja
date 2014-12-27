@@ -7,8 +7,7 @@
  <lastBuildDate>{{now}}</lastBuildDate>
  <pubDate>{{now}}</pubDate>
  <language>en-US</language>
-
-{%- for post in posts %} 
+{% for post in posts %} 
  <item>
   <title>{{post.title}}</title>
   <description></description>
@@ -16,7 +15,6 @@
   <guid isPermaLink="true">https://dparrol.github.io/{{post.href}}</guid>
   <pubDate>{{post.date.strftime('%a, %d %b %Y %H:%M:%S %z')}}</pubDate>
  </item>
-{% endfor -%} 
-
+{% endfor %} 
 </channel>
 </rss>

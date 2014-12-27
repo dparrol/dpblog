@@ -34,7 +34,7 @@ class Post(object):
                 with open(os.path.join(path, filename)) as f:
                     data = f.read()
                 posts.append(cls(data, filename=filename))
-        posts.sort(key=lambda p: (p.date, p.title))
+        posts.sort(key=lambda p: (p.date, p.title), reverse=True)
         return posts
         
     def _meta(self, field, **kwargs):
