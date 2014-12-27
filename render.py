@@ -40,3 +40,9 @@ def renderAll(srcDir, htmlDir):
         print 'Copying static resources'
         shutil.copytree(os.path.join(srcDir, 'static'), os.path.join(htmlDir, 'static'))
 
+if __name__ == '__main__':
+    if len(sys.argv) != 3 or '-h' in sys.argv or '--help' in sys.argv:
+        print 'usage: render.py fromDir toDir'
+        print 'Renders blog using source from fromDir. Puts html in toDir.'
+        sys.exit(1)
+    renderAll(sys.argv[1], sys.argv[2])
