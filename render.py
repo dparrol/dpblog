@@ -41,15 +41,15 @@ def renderAll(srcDir, htmlDir):
         filename = os.path.join(htmlDir, post.filename.replace('.md', '.html'))
         with open(filename, 'w') as f:
             print 'Generating', filename
-            f.write(util.toutf8(renderPost(post)))
+            f.write(renderPost(post).encode('utf8'))
 
     # Render the various indexes
     print 'Generating index.html'
     with open(os.path.join(htmlDir, 'index.html'), 'w') as f:
-        f.write(renderIndex(posts))
+        f.write(renderIndex(posts).encode('utf8'))
     print 'Generating RSS feed'
     with open(os.path.join(htmlDir, 'feed.xml'), 'w') as f:
-        f.write(renderRSS(posts))
+        f.write(renderRSS(posts).encode('utf8'))
 
     # Copy over the whole static resource hierarchy (if any).
     if os.path.exists(os.path.join(srcDir, 'static')):
