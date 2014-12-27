@@ -49,3 +49,8 @@ class Post(object):
 
     def __repr__(self):
         return '<Post: %r on %r>' % (self.title, self.date)
+
+    def cdata(self):
+        """Return jinja2 Markup cdata for inserting into RSS feed."""
+        from jinja2 import Markup
+        return Markup(u'<![CDATA[' + self.html + u']]>')

@@ -10,7 +10,7 @@
 {% for post in posts %} 
  <item>
   <title>{{post.title}}</title>
-  <description></description>
+  <description>{{post.cdata()}}</description>
   <link>https://dparrol.github.io/{{post.href}}</link>
   <guid isPermaLink="true">https://dparrol.github.io/{{post.href}}</guid>
   <pubDate>{{post.date.strftime('%a, %d %b %Y %H:%M:%S %z')}}</pubDate>
