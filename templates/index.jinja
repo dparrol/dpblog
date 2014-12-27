@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Danrich Parrol's Blog</title>
+  <meta charset="UTF-8">
+</head>
+<body>
+<h1>Danrich Parrol's Blog</h1>
+{% for heading, posts in sections %}
+<h2>{{heading}}</h2>
+{% for post in posts %}
+<p><a href="{{post.href}}">{{post.title}}</a>
+{% endfor %}
+{% endfor %}
+</body>
+</html>

@@ -3,6 +3,7 @@
 import os, sys
 import util
 import jinja2
+from collections import defaultdict
 from post import Post
 
 def getTemplate(name):
@@ -18,6 +19,15 @@ def renderPost(post):
         body = jinja2.Markup(post.html),
     )
 
+def renderIndex(posts):
+    """Render the front page, listing all posts."""
+    sections = defaultdict(list)
+    for post in posts:
+        sections[post.date.year].append({
+            'title': post.title,
+            'href': post.filename.replace('.md', '.html'),
+        })
+    return getTemplate('index').render(sections=sorted(sections.items()))
 
 def renderAll(srcDir, htmlDir):
     """Take all the blog posts in srcDir, render blog to htmlDir."""
@@ -31,8 +41,10 @@ def renderAll(srcDir, htmlDir):
             f.write(util.toutf8(renderPost(post)))
 
     # Render the various indexes
-    # TODO(dparrol): front page
-    # TODO(dparrol): index of all posts
+    print 'Generating index.html'
+    with open(os.path.join(htmlDir, 'index.html'), 'w') as f:
+        f.write(renderIndex(posts))
+        
     # TODO(dparrol): RSS or atom feed
 
     # Copy over the whole static resource hierarchy (if any).
