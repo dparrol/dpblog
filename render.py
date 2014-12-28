@@ -24,13 +24,14 @@ def renderIndex(posts):
     """Render the front page, listing all posts."""
     sections = defaultdict(list)
     for post in posts:
-        sections[post.date.year].append(post)
+        if not post.hidden:
+            sections[post.date.year].append(post)
     return getTemplate('index').render(sections=sorted(sections.items()))
 
 def renderRSS(posts):
     """Render the RSS feed."""
     now = datetime.datetime.now().strftime('%a, %d %b %Y %H:%M:%S %z')
-    return getTemplate('feed').render(now=now, posts=posts)
+    return getTemplate('feed').render(now=now, posts=[p for p in posts if not p.hidden])
 
 def renderAll(srcDir, htmlDir):
     """Take all the blog posts in srcDir, render blog to htmlDir."""

@@ -26,6 +26,7 @@ class Post(object):
         # A few fields are derived from the metadata.
         self.title = self._meta('title')
         self.date = dateparse(self._meta('date'))
+        self.hidden = self._meta('hidden', default='false').lower() not in ('no', 'false')
 
     @classmethod
     def getAll(cls, path):
