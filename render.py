@@ -1,6 +1,6 @@
 """Rendering lists of blog posts to generate the various pages."""
 
-import os, sys
+import os, sys, shutil
 import datetime
 import util
 import jinja2
