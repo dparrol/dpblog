@@ -54,4 +54,4 @@ class Post(object):
     def cdata(self):
         """Return jinja2 Markup cdata for inserting into RSS feed."""
         from jinja2 import Markup
-        return Markup(u'<![CDATA[' + self.html + u']]>')
+        return Markup(u'<![CDATA[' + self.html.replace(']]>', ']]]]><![CDATA[>') + u']]>')
