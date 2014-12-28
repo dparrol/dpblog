@@ -17,6 +17,7 @@ class Post(object):
 
     def __init__(self, markdown, filename=None):
         self.markdown = util.tounicode(markdown)
+        self.markdown = self.markdown.replace(u' -- ', u' \u2013 ')
         self.filename = filename
         self.href = filename.replace('.md', '.html') if filename else None
         md = Markdown(extensions=EXTENSIONS, output_format='html5', safe_mode=False, lazy_ol=False)
