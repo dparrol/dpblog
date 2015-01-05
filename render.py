@@ -26,7 +26,7 @@ def renderIndex(posts):
     for post in posts:
         if not post.hidden:
             sections[post.date.year].append(post)
-    return getTemplate('index').render(sections=sorted(sections.items()))
+    return getTemplate('index').render(sections=sorted(sections.items(), reverse=True))
 
 def renderRSS(posts):
     """Render the RSS feed."""
